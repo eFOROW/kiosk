@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -54,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
         // 그리드 레이아웃 매니저 설정 (2열)
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
-        recyclerView.setLayoutManager(gridLayoutManager);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
         // 어댑터 초기화 및 설정
         adapter = new RecyclerViewAdapter();
@@ -65,29 +65,31 @@ public class MainActivity extends AppCompatActivity {
     public static class Data {
         String name;
         int price;
+        String option;
         String imageUrl;
 
         // 데이터 생성자
-        public Data(String name, int price, String imageUrl) {
+        public Data(String name, int price, String option ,String imageUrl) {
             this.name = name;
             this.price = price;
+            this.option = option == null ? "없음" : option;
             this.imageUrl = imageUrl;
         }
     }
 
     private void setData() {
         // 예제 데이터 추가
-        Data d = new Data("버거1", 1000, "https://www.mcdonalds.co.kr/upload/product/pcfile/1583727855319.png");
+        Data d = new Data("아메리카노", 2500,null,"https://composecoffee.com/files/thumbnails/451/038/384x530.crop.jpg?t=1708913708");
         adapter.addItem(d);
-        d = new Data("버거2", 2000, "https://www.mcdonalds.co.kr/upload/product/pcfile/1583727855319.png");
+        d = new Data("아메리카노", 2500, "얼음 많이, 시럽 조금","https://composecoffee.com/files/thumbnails/451/038/384x530.crop.jpg?t=1708913708");
         adapter.addItem(d);
-        d = new Data("버거3", 3000, "https://www.mcdonalds.co.kr/upload/product/pcfile/1583727855319.png");
+        d = new Data("아메리카노", 2500, null, "https://composecoffee.com/files/thumbnails/451/038/384x530.crop.jpg?t=1708913708");
         adapter.addItem(d);
-        d = new Data("버거4", 4000, "https://www.mcdonalds.co.kr/upload/product/pcfile/1583727855319.png");
+        d = new Data("아메리카노", 2500, null,"https://composecoffee.com/files/thumbnails/451/038/384x530.crop.jpg?t=1708913708");
         adapter.addItem(d);
-        d = new Data("버거5", 5000, "https://www.mcdonalds.co.kr/upload/product/pcfile/1583727855319.png");
+        d = new Data("아메리카노", 2500, null,"https://composecoffee.com/files/thumbnails/451/038/384x530.crop.jpg?t=1708913708");
         adapter.addItem(d);
-        d = new Data("버거6", 6000, "https://www.mcdonalds.co.kr/upload/product/pcfile/1583727855319.png");
+        d = new Data("아메리카노", 2500, null,"https://composecoffee.com/files/thumbnails/451/038/384x530.crop.jpg?t=1708913708");
         adapter.addItem(d);
     }
 
@@ -108,7 +110,8 @@ public class MainActivity extends AppCompatActivity {
             Data currentItem = data.get(position);
 
             dataViewHolder.name_tv.setText(currentItem.name);
-            dataViewHolder.price_tv.setText(String.valueOf(currentItem.price));
+            dataViewHolder.price_tv.setText("가격 : " + String.valueOf(currentItem.price));
+            dataViewHolder.option_tv.setText("옵션 : " + currentItem.option);
 
             // 이미지 URL을 사용하여 이미지 로드
             Glide.with(dataViewHolder.itemView.getContext())
@@ -128,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         private class DataViewHolder extends RecyclerView.ViewHolder {
-            TextView name_tv, price_tv;
+            TextView name_tv, price_tv, option_tv;
             ImageView imageView;
 
             // 뷰홀더 생성자
@@ -136,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
                 super(view);
                 name_tv = (TextView) view.findViewById(R.id.item_name_textView);
                 price_tv = (TextView) view.findViewById(R.id.item_price_textView);
+                option_tv = (TextView) view.findViewById(R.id.item_option_textView);
                 imageView = (ImageView) view.findViewById(R.id.item_image_imageView);
             }
         }

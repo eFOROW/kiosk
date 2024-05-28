@@ -1,16 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:gravity="bottom"
+    app:umanoDragView="@id/dragView"
+    app:umanoPanelHeight="145dp"
+    app:umanoOverlay="true"
+    app:umanoShadowHeight="5dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/main_RecyclerView"
+    <!-- 메인 콘텐츠 -->
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content">
 
-</LinearLayout>
+
+    </LinearLayout>
+
+    <!-- 결제 슬라이딩 패널 -->
+    <LinearLayout
+        android:id="@+id/dragView"
+        android:layout_width="match_parent"
+        android:layout_height="700dp"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:focusable="false"
+        android:background="#00FFFFFF"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/cart_layout"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            layout="@layout/cart_pannel"/>
+
+    </LinearLayout>
+
+</com.sothree.slidinguppanel.SlidingUpPanelLayout>
