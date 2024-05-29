@@ -24,15 +24,25 @@ public class StartActivity extends AppCompatActivity {
             return insets;
         });
 
-        Button start_Btn = (Button) findViewById(R.id.start_Btn);
+        Button pickup_Btn = (Button) findViewById(R.id.pickup_Button);
+        Button sit_Btn = (Button) findViewById(R.id.sit_Button);
 
-        start_Btn.setOnClickListener(new View.OnClickListener() {
+        Button.OnClickListener listener = new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(StartActivity.this, MainActivity.class);
-                startActivity(intent);
+                int id = v.getId();
+                if (id == R.id.pickup_Button) {
+                    Intent intent = new Intent(StartActivity.this, MainActivity.class);
+                    intent.putExtra("info", "pickup");
+                    startActivity(intent);
+                } else if (id == R.id.sit_Button) {
+                    Intent intent = new Intent(StartActivity.this, MainActivity.class);
+                    intent.putExtra("info", "sit");
+                    startActivity(intent);
+                }
             }
-        });
-
+        };
+        pickup_Btn.setOnClickListener(listener);
+        sit_Btn.setOnClickListener(listener);
     }
 }

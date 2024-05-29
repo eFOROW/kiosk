@@ -8,14 +8,35 @@
     tools:context=".StartActivity">
 
     <Button
-        android:id="@+id/start_Btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="주문하기"
+        android:id="@+id/pickup_Button"
+        android:layout_width="270dp"
+        android:layout_height="270dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginBottom="112dp"
+        android:backgroundTint="@color/white"
+        android:drawableTop="@drawable/pickup_icon"
+        android:paddingTop="25dp"
+        android:text="포장해서 갈래요"
+        android:textColor="@color/black"
+        android:textSize="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.816"/>
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/sit_Button" />
+
+    <Button
+        android:id="@+id/sit_Button"
+        android:layout_width="270dp"
+        android:layout_height="270dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginBottom="112dp"
+        android:backgroundTint="#FB5832"
+        android:drawableTop="@drawable/sit_icon"
+        android:paddingTop="25dp"
+        android:text="매장에서 먹어요"
+        android:textColor="@color/black"
+        android:textSize="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

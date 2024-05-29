@@ -4,6 +4,7 @@ package kr.ac.wsu.kiosk;
 
 import static android.text.TextUtils.replace;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -62,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
         // 초기화 및 데이터 설정
         init();
         setData();
+
+        // 시작화면에서 포장 or 매장 선택 정보 받기
+        String info = getIntent().getStringExtra("info");
     }
 
     private void init() {
@@ -74,9 +84,10 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         // Button 객체 생성
-        Button coffeeButton = (Button) findViewById(R.id.main_coffee_button);
-        Button smothieButton = (Button) findViewById(R.id.main_smothie_button);
-        Button teaButton = (Button) findViewById(R.id.main_tea_button);
+        Button coffeeBtn = (Button) findViewById(R.id.main_coffee_button);
+        Button smothieBtn = (Button) findViewById(R.id.main_smothie_button);
+        Button teaBtn = (Button) findViewById(R.id.main_tea_button);
+        Button payBtn = (Button) findViewById(R.id.mian_payment_Button);
 
         // FragmentManager
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -93,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
         Button.OnClickListener listener = new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 버튼 클릭 동작
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 int id = v.getId();
                 if (id == R.id.main_coffee_button) {
@@ -104,13 +116,17 @@ public class MainActivity extends AppCompatActivity {
                 } else if (id == R.id.main_tea_button) {
                     fragmentTransaction.replace(R.id.main_Framelayout, teaFragment);
                     fragmentTransaction.commit();
+                }else if (id == R.id.mian_payment_Button) {
+                    fragmentTransaction.replace(R.id.main_Framelayout, teaFragment);
+                    fragmentTransaction.commit();
                 }
             }
         };
 
-        coffeeButton.setOnClickListener(listener);
-        smothieButton.setOnClickListener(listener);
-        teaButton.setOnClickListener(listener);
+        coffeeBtn.setOnClickListener(listener);
+        smothieBtn.setOnClickListener(listener);
+        teaBtn.setOnClickListener(listener);
+        payBtn.setOnClickListener(listener);
     }
 
     public static class Data {

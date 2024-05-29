@@ -49,9 +49,11 @@
             </LinearLayout>
 
             <Button
+                android:id="@+id/mian_payment_Button"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
                 android:text="결제하기"/>
+
         </LinearLayout>
 
         <View
