@@ -2,10 +2,13 @@
 
 package kr.ac.wsu.kiosk;
 
+import static android.text.TextUtils.replace;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
@@ -14,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,10 +27,17 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
+import kr.ac.wsu.kiosk.main_fragment.CoffeeFragment;
+import kr.ac.wsu.kiosk.main_fragment.SmothieFragment;
+import kr.ac.wsu.kiosk.main_fragment.TeaFragment;
+
 public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerViewAdapter adapter;
     List<Data> data = new ArrayList<>();
+    private CoffeeFragment coffeeFragment;
+    private SmothieFragment smothieFragment;
+    private TeaFragment teaFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,19 +59,58 @@ public class MainActivity extends AppCompatActivity {
         // RecyclerView 객체 초기화
         recyclerView = (RecyclerView) findViewById(R.id.main_RecyclerView);
 
-        // RecyclerView 초기화 및 데이터 설정
+        // 초기화 및 데이터 설정
         init();
         setData();
     }
 
     private void init() {
-        // 그리드 레이아웃 매니저 설정 (2열)
+        // LinearLayout 매니저 설정
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         // 어댑터 초기화 및 설정
         adapter = new RecyclerViewAdapter();
         recyclerView.setAdapter(adapter);
+
+        // Button 객체 생성
+        Button coffeeButton = (Button) findViewById(R.id.main_coffee_button);
+        Button smothieButton = (Button) findViewById(R.id.main_smothie_button);
+        Button teaButton = (Button) findViewById(R.id.main_tea_button);
+
+        // FragmentManager
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        // Fragment 동적 할당
+        coffeeFragment = new CoffeeFragment();
+        smothieFragment = new SmothieFragment();
+        teaFragment = new TeaFragment();
+
+        fragmentTransaction.add(R.id.main_Framelayout, coffeeFragment);
+        fragmentTransaction.commit();
+
+        Button.OnClickListener listener = new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                int id = v.getId();
+                if (id == R.id.main_coffee_button) {
+                    fragmentTransaction.replace(R.id.main_Framelayout, coffeeFragment);
+                    fragmentTransaction.commit();
+                } else if (id == R.id.main_smothie_button) {
+                    fragmentTransaction.replace(R.id.main_Framelayout, smothieFragment);
+                    fragmentTransaction.commit();
+                } else if (id == R.id.main_tea_button) {
+                    fragmentTransaction.replace(R.id.main_Framelayout, teaFragment);
+                    fragmentTransaction.commit();
+                }
+            }
+        };
+
+        coffeeButton.setOnClickListener(listener);
+        smothieButton.setOnClickListener(listener);
+        teaButton.setOnClickListener(listener);
     }
 
     public static class Data {
