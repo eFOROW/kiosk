@@ -17,7 +17,7 @@
         android:layout_marginStart="25dp"
         android:layout_gravity="center"
         android:orientation="vertical"
-        android:layout_width="wrap_content"
+        android:layout_width="370dp"
         android:layout_height="wrap_content">
 
         <TextView
@@ -52,8 +52,11 @@
 
     <TextView
         android:text="2"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:gravity="center"
         android:layout_gravity="center"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"/>
 
     <Button
@@ -63,8 +66,12 @@
         android:layout_height="wrap_content"/>
 
     <Button
+        android:id="@+id/itme_delete_Button"
+        android:layout_marginLeft="45dp"
         android:layout_gravity="center"
         android:text="X"
+        android:textColor="@color/white"
+        android:backgroundTint="#FF3D3D"
         android:layout_width="40dp"
         android:layout_height="wrap_content"/>
 
