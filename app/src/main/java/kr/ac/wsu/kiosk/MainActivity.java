@@ -153,6 +153,8 @@ public class MainActivity extends AppCompatActivity {
             holder.option_tv.setText("옵션 : " + currentItem.option);
             holder.count_tv.setText(currentItem.count+"");
             holder.imageView.setImageResource(currentItem.imageResourceId);
+            if (currentItem.temperature.equals("Ice")) holder.temp_iv.setImageResource(R.drawable.ice_icon);
+            else holder.temp_iv.setImageResource(R.drawable.hot_icon);
 
             holder.add_Btn.setOnClickListener(v -> {
                 int adapterPosition = holder.getAdapterPosition();
@@ -227,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
         // ViewHolder 클래스
         class DataViewHolder extends RecyclerView.ViewHolder {
             TextView name_tv, price_tv, option_tv, count_tv;
-            ImageView imageView;
+            ImageView imageView, temp_iv;
             Button add_Btn, minus_Btn, delete_Btn;
 
             DataViewHolder(View view) {
@@ -237,6 +239,7 @@ public class MainActivity extends AppCompatActivity {
                 count_tv = view.findViewById(R.id.item_count_TextView);
                 option_tv = view.findViewById(R.id.item_option_textView);
                 imageView = view.findViewById(R.id.item_image_imageView);
+                temp_iv = view.findViewById(R.id.item_temp_ImageView);
                 add_Btn = view.findViewById(R.id.item_add_Button);
                 minus_Btn = view.findViewById(R.id.item_minus_Button);
                 delete_Btn = view.findViewById(R.id.itme_delete_Button);
