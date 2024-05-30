@@ -16,12 +16,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import kr.ac.wsu.kiosk.Data;
+import kr.ac.wsu.kiosk.MainActivity;
 import kr.ac.wsu.kiosk.R;
 
 public class SmothieFragment extends Fragment {
 
     AlertDialog dialog;
     String menu;
+    TextView menuPrice_TextView, menuTextView;
+    int img_id; // 이미지 id
 
     @SuppressLint("UseRequireInsteadOfGet")
     @Nullable
@@ -107,16 +112,16 @@ public class SmothieFragment extends Fragment {
 
         // 선택 메뉴 출력
         ImageView menuImageView = dialogView.findViewById(R.id.option_image_imageView);
-        TextView menuTextView = dialogView.findViewById(R.id.option_name_textView);
-        TextView menuPrice_TextView = dialogView.findViewById(R.id.option_price_textView);
+        menuTextView = dialogView.findViewById(R.id.option_name_textView);
+        menuPrice_TextView = dialogView.findViewById(R.id.option_price_textView);
         setOption_init(menuImageView, menuTextView, menuPrice_TextView,menu);
 
         // 기본 선택값으로 ice를 설정합니다.
         selectTemperatureOption(iceBtn, "Ice");
         // 기본 선택값으로 normal을 설정합니다.
-        selectSyrupOption(normalSyrupBtn, "Normal");
+        selectSyrupOption(normalSyrupBtn, "보통");
         // 기본 선택값으로 normal을 설정
-        selectWhippingOption(normalWhippingBtn, "Normal");
+        selectWhippingOption(normalWhippingBtn, "보통");
 
         // 버튼 클릭 리스너 설정
         hotBtn.setOnClickListener(optionButtonClickListener);
@@ -144,34 +149,59 @@ public class SmothieFragment extends Fragment {
         switch (menu){
             case "blueberry":
                 menuImageView.setImageResource(R.drawable.blueberry_smothie);
+                img_id = R.drawable.blueberry_smothie;
                 menuTextView.setText("블루베리 스무디");
                 menuPrice_TextView.setText("3000원");
                 break;
             case "strawberry":
                 menuImageView.setImageResource(R.drawable.strawberry_smothie);
+                img_id = R.drawable.strawberry_smothie;
                 menuTextView.setText("딸기 스무디");
                 menuPrice_TextView.setText("3500원");
                 break;
             case "mango":
                 menuImageView.setImageResource(R.drawable.mango_smothie);
+                img_id = R.drawable.mango_smothie;
                 menuTextView.setText("망고 스무디");
                 menuPrice_TextView.setText("3800원");
                 break;
             case "plainyogurt":
                 menuImageView.setImageResource(R.drawable.plainyogurt_smothie);
+                img_id = R.drawable.plainyogurt_smothie;
                 menuTextView.setText("플레인요거트 스무디");
                 menuPrice_TextView.setText("3800원");
                 break;
             case "citron":
                 menuImageView.setImageResource(R.drawable.citron_smothie);
+                img_id = R.drawable.citron_smothie;
                 menuTextView.setText("유자 스무디");
                 menuPrice_TextView.setText("3500원");
                 break;
             case "blueberryyougurt":
                 menuImageView.setImageResource(R.drawable.blueberryyougurt_smothie);
+                img_id = R.drawable.blueberryyougurt_smothie;
                 menuTextView.setText("블루베리요거트 스무디");
                 menuPrice_TextView.setText("4000원");
                 break;
+        }
+    }
+
+    private MainActivity.RecyclerViewAdapter adapter; // MainActivity의 adapter를 참조하기 위한 변수
+
+    // MainActivity에서 adapter를 설정하는 메서드
+    public void setAdapter(MainActivity.RecyclerViewAdapter adapter) {
+        this.adapter = adapter;
+    }
+
+    // 데이터를 추가하는 메서드
+    private void addItemToAdapter() {
+        if (adapter != null) {
+            // MainActivity의 adapter에 데이터 추가
+            String menu = menuTextView.getText().toString();
+            int price = Integer.parseInt(menuPrice_TextView.getText().toString().replace("원", ""));
+            String option = "시럽 " + syrup + ", 휘핑 " + whipping;
+
+            adapter.addItem(new Data(menu, temperature, price, option, img_id));
         }
     }
 
@@ -184,19 +214,20 @@ public class SmothieFragment extends Fragment {
             } else if (v.getId() == R.id.option_iceButton) {
                 selectTemperatureOption((Button) v, "Ice");
             } else if (v.getId() == R.id.option_littleSyrupButton) {
-                selectSyrupOption((Button) v, "Little");
+                selectSyrupOption((Button) v, "조금");
             } else if (v.getId() == R.id.option_normalSyrupButton) {
-                selectSyrupOption((Button) v, "Normal");
+                selectSyrupOption((Button) v, "보통");
             } else if (v.getId() == R.id.option_muchSyrupButton) {
-                selectSyrupOption((Button) v, "Much");
+                selectSyrupOption((Button) v, "많이");
             } else if (v.getId() == R.id.option_littleWhippingButton) {
-                selectWhippingOption((Button) v, "Little");
+                selectWhippingOption((Button) v, "조금");
             } else if (v.getId() == R.id.option_normalWhippingButton) {
-                selectWhippingOption((Button) v, "Normal");
+                selectWhippingOption((Button) v, "보통");
             } else if (v.getId() == R.id.option_muchWhippingButton) {
-                selectWhippingOption((Button) v, "Much");
+                selectWhippingOption((Button) v, "많이");
             } else if (v.getId() == R.id.option_selectButton) {
                 Log.d("옵션 선택 결과 : ", temperature + " & " + syrup + " & " + whipping);
+                addItemToAdapter();
                 dialog.dismiss();
             } else if (v.getId() == R.id.option_cancelButton) {
                 dialog.dismiss();

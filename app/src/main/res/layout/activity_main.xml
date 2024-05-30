@@ -10,7 +10,7 @@
     app:umanoDragView="@id/dragView"
     app:umanoPanelHeight="145dp"
     app:umanoOverlay="true"
-    app:umanoShadowHeight="5dp">
+    app:umanoShadowHeight="500dp">
 
     <!-- 메인 콘텐츠 -->
     <LinearLayout

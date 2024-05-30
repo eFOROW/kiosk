@@ -1,5 +1,6 @@
 package kr.ac.wsu.kiosk;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,8 +21,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     private SmothieFragment smothieFragment;
     private TeaFragment teaFragment;
 
-    //
     TextView count_tv, cart_price_TextView;
 
     @Override
@@ -65,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
 
         // 초기화 및 데이터 설정
         init();
-        setData();
     }
 
     private void init() {
@@ -90,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         // Fragment 동적 할당 및 추가
         coffeeFragment = new CoffeeFragment();
         smothieFragment = new SmothieFragment();
+        smothieFragment.setAdapter(adapter);
         teaFragment = new TeaFragment();
 
         fragmentTransaction.add(R.id.main_Framelayout, coffeeFragment);
@@ -136,42 +134,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static class Data {
-        String name;
-        int price;
-        String option;
-        String imageUrl;
-
-        // 데이터 생성자
-        public Data(String name, int price, String option, String imageUrl) {
-            this.name = name;
-            this.price = price;
-            this.option = option == null ? "없음" : option;
-            this.imageUrl = imageUrl;
-        }
-    }
-
-    private void setData() {
-        // 예제 데이터 추가
-        adapter.addItem(new Data("아메리카노", 2500, null, "https://composecoffee.com/files/thumbnails/451/038/384x530.crop.jpg?t=1708913708"));
-        adapter.addItem(new Data("아메리카노", 2500, "얼음 많이, 시럽 조금", "https://composecoffee.com/files/thumbnails/451/038/384x530.crop.jpg?t=1708913708"));
-        adapter.addItem(new Data("아메리카노", 2500, null, "https://composecoffee.com/files/thumbnails/451/038/384x530.crop.jpg?t=1708913708"));
-        adapter.addItem(new Data("블루베리스무디", 3500, null, "https://composecoffee.com/files/thumbnails/451/038/384x530.crop.jpg?t=1708913708"));
-        adapter.addItem(new Data("아메리카노", 2500, null, "https://composecoffee.com/files/thumbnails/451/038/384x530.crop.jpg?t=1708913708"));
-        adapter.addItem(new Data("아메리카노", 2500, null, "https://composecoffee.com/files/thumbnails/451/038/384x530.crop.jpg?t=1708913708"));
-        adapter.addItem(new Data("아메리카노", 2500, "시럽 조금", "https://composecoffee.com/files/thumbnails/451/038/384x530.crop.jpg?t=1708913708"));
-    }
-
-    // 장바구니 총 가격 업데이트
-    private void updateCartPrice() {
-        int totalPrice = 0;
-        for (Data item : data) {
-            totalPrice += item.price;
-        }
-        cart_price_TextView.setText("총 가격: " + totalPrice + "원");
-    }
-
-    private class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.DataViewHolder> {
+    public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.DataViewHolder> {
 
         @NonNull
         @Override
@@ -180,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
             return new DataViewHolder(view);
         }
 
+        @SuppressLint("SetTextI18n")
         @Override
         public void onBindViewHolder(@NonNull DataViewHolder holder, int position) {
             Data currentItem = data.get(position);
@@ -187,10 +151,26 @@ public class MainActivity extends AppCompatActivity {
             holder.name_tv.setText(currentItem.name);
             holder.price_tv.setText("가격 : " + currentItem.price + "원");
             holder.option_tv.setText("옵션 : " + currentItem.option);
+            holder.count_tv.setText(currentItem.count+"");
+            holder.imageView.setImageResource(currentItem.imageResourceId);
 
-            Glide.with(holder.itemView.getContext())
-                    .load(currentItem.imageUrl)
-                    .into(holder.imageView);
+            holder.add_Btn.setOnClickListener(v -> {
+                int adapterPosition = holder.getAdapterPosition();
+                data.get(adapterPosition).count++;
+                updateItemCount();
+                updateCartPrice();
+                notifyItemChanged(adapterPosition);
+            });
+
+            holder.minus_Btn.setOnClickListener(v -> {
+                int adapterPosition = holder.getAdapterPosition();
+                if (data.get(adapterPosition).count > 1) {
+                    data.get(adapterPosition).count--;
+                    updateItemCount();
+                    updateCartPrice();
+                    notifyItemChanged(adapterPosition);
+                }
+            });
 
             holder.delete_Btn.setOnClickListener(v -> {
                 int adapterPosition = holder.getAdapterPosition();
@@ -206,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // 아이템 추가
-        void addItem(Data d) {
+        public void addItem(Data d) {
             data.add(d);
             notifyItemInserted(data.size() - 1);
             updateItemCount();
@@ -228,21 +208,37 @@ public class MainActivity extends AppCompatActivity {
 
         // 아이템 개수 업데이트
         private void updateItemCount() {
-            count_tv.setText(data.size() + "개");
+            int totalCount = 0;
+            for (Data item : data) {
+                totalCount += item.count;
+            }
+            count_tv.setText(totalCount + "개");
+        }
+
+        // 장바구니 총 가격 업데이트
+        private void updateCartPrice() {
+            int totalPrice = 0;
+            for (Data item : data) {
+                totalPrice += item.price * item.count;
+            }
+            cart_price_TextView.setText("총 가격: " + totalPrice + "원");
         }
 
         // ViewHolder 클래스
         class DataViewHolder extends RecyclerView.ViewHolder {
-            TextView name_tv, price_tv, option_tv;
+            TextView name_tv, price_tv, option_tv, count_tv;
             ImageView imageView;
-            Button delete_Btn;
+            Button add_Btn, minus_Btn, delete_Btn;
 
             DataViewHolder(View view) {
                 super(view);
                 name_tv = view.findViewById(R.id.item_name_textView);
                 price_tv = view.findViewById(R.id.item_price_textView);
+                count_tv = view.findViewById(R.id.item_count_TextView);
                 option_tv = view.findViewById(R.id.item_option_textView);
                 imageView = view.findViewById(R.id.item_image_imageView);
+                add_Btn = view.findViewById(R.id.item_add_Button);
+                minus_Btn = view.findViewById(R.id.item_minus_Button);
                 delete_Btn = view.findViewById(R.id.itme_delete_Button);
             }
         }

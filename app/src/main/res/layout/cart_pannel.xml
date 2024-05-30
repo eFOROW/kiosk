@@ -70,7 +70,7 @@
                 <TextView
                     android:id="@+id/cart_price_TextView"
                     android:textSize="20dp"
-                    android:text="1000원"
+                    android:text="0원"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
