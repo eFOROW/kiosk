@@ -14,4 +14,4 @@
 ## 🧑‍🤝‍🧑 개발자 소개
 - **김원형(PM)** : Android & Design 담당
 - **김차겸(PA)** : Design & Structure 담당
-- **서동현(PA)** : Presention & Plan 담당
+- **서동현(PA)** : Flow chart  & Plan 담당
