@@ -27,7 +27,7 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/blueberryyougurt_smothie" />
+                android:src="@drawable/americano" />
 
             <LinearLayout
                 android:layout_marginStart="25dp"
@@ -70,6 +70,15 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/option_iceButton"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:text="Ice"
+                android:backgroundTint="#FFBB33"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"/>
+
+            <Button
                 android:id="@+id/option_hotButton"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
@@ -78,15 +87,6 @@
                 android:backgroundTint="@color/white"
                 android:layout_weight="1"
                 android:layout_marginEnd="8dp"/>
-
-            <Button
-                android:id="@+id/option_iceButton"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:text="Ice"
-                android:backgroundTint="#FFBB33"
-                android:layout_weight="1"
-                android:layout_marginStart="8dp"/>
 
         </LinearLayout>
 
@@ -152,6 +152,15 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/option_noWhippingButton"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:text="휘핑 없음"
+                android:backgroundTint="#FFBB33"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"/>
+
+            <Button
                 android:id="@+id/option_littleWhippingButton"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
@@ -162,7 +171,8 @@
                 android:layout_marginEnd="8dp"/>
 
             <Button
-                android:backgroundTint="#FFBB33"
+                android:backgroundTint="@color/white"
+                android:textColor="@color/black"
                 android:id="@+id/option_normalWhippingButton"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"

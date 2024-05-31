@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Fragment 동적 할당 및 추가
         coffeeFragment = new CoffeeFragment();
+        coffeeFragment.setAdapter(adapter);
         smothieFragment = new SmothieFragment();
         smothieFragment.setAdapter(adapter);
         teaFragment = new TeaFragment();

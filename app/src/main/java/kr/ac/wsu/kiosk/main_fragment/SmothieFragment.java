@@ -1,5 +1,7 @@
 package kr.ac.wsu.kiosk.main_fragment;
 
+import static android.view.View.GONE;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.res.ColorStateList;
@@ -49,22 +51,22 @@ public class SmothieFragment extends Fragment {
                 int id = v.getId();
                 if (id == R.id.smothie_blueberry_Button) {
                     menu = "blueberry";
-                    showCustomDialog();
+                    showDialog();
                 } else if (id == R.id.smothie_strawberry_Button) {
                     menu = "strawberry";
-                    showCustomDialog();
+                    showDialog();
                 } else if (id == R.id.smothie_mango_Button) {
                     menu = "mango";
-                    showCustomDialog();
+                    showDialog();
                 } else if (id == R.id.smothie_plainyogurt_Button) {
                     menu = "plainyogurt";
-                    showCustomDialog();
+                    showDialog();
                 } else if (id == R.id.smothie_citron_Button) {
                     menu = "citron";
-                    showCustomDialog();
+                    showDialog();
                 } else if (id == R.id.smothie_blueberryyougurt_Button) {
                     menu = "blueberryyougurt";
-                    showCustomDialog();
+                    showDialog();
                 }
             }
         };
@@ -85,7 +87,7 @@ public class SmothieFragment extends Fragment {
     private Button selectedWhippingButton; // 현재 선택된 휘핑 옵션 버튼을 추적하기 위한 변수
     private String temperature, syrup, whipping; // 선택된 온도와 시럽, 휘핑을 저장하는 변수
 
-    private void showCustomDialog() {
+    private void showDialog() {
         // AlertDialog.Builder를 사용하여 Custom Dialog 생성
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = requireActivity().getLayoutInflater();
@@ -95,6 +97,7 @@ public class SmothieFragment extends Fragment {
         // 온도 선택
         Button hotBtn = dialogView.findViewById(R.id.option_hotButton);
         Button iceBtn = dialogView.findViewById(R.id.option_iceButton);
+        hotBtn.setVisibility(View.INVISIBLE);
 
         // 시럽 선택
         Button littleSyrupBtn = dialogView.findViewById(R.id.option_littleSyrupButton);
@@ -102,6 +105,7 @@ public class SmothieFragment extends Fragment {
         Button muchSyrupBtn = dialogView.findViewById(R.id.option_muchSyrupButton);
 
         //휘핑 선택
+        Button noWhippingBtn = dialogView.findViewById(R.id.option_noWhippingButton);
         Button littleWhippingBtn = dialogView.findViewById(R.id.option_littleWhippingButton);
         Button normalWhippingBtn = dialogView.findViewById(R.id.option_normalWhippingButton);
         Button muchWhippingBtn = dialogView.findViewById(R.id.option_muchWhippingButton);
@@ -120,8 +124,8 @@ public class SmothieFragment extends Fragment {
         selectTemperatureOption(iceBtn, "Ice");
         // 기본 선택값으로 normal을 설정합니다.
         selectSyrupOption(normalSyrupBtn, "보통");
-        // 기본 선택값으로 normal을 설정
-        selectWhippingOption(normalWhippingBtn, "보통");
+        // 기본 선택값으로 no를 설정
+        selectWhippingOption(noWhippingBtn, "없이");
 
         // 버튼 클릭 리스너 설정
         hotBtn.setOnClickListener(optionButtonClickListener);
@@ -130,6 +134,7 @@ public class SmothieFragment extends Fragment {
         normalSyrupBtn.setOnClickListener(optionButtonClickListener);
         muchSyrupBtn.setOnClickListener(optionButtonClickListener);
         littleWhippingBtn.setOnClickListener(optionButtonClickListener);
+        noWhippingBtn.setOnClickListener(optionButtonClickListener);
         normalWhippingBtn.setOnClickListener(optionButtonClickListener);
         muchWhippingBtn.setOnClickListener(optionButtonClickListener);
         doneBtn.setOnClickListener(optionButtonClickListener);
@@ -219,6 +224,8 @@ public class SmothieFragment extends Fragment {
                 selectSyrupOption((Button) v, "보통");
             } else if (v.getId() == R.id.option_muchSyrupButton) {
                 selectSyrupOption((Button) v, "많이");
+            } else if (v.getId() == R.id.option_noWhippingButton) {
+                selectWhippingOption((Button) v, "없이");
             } else if (v.getId() == R.id.option_littleWhippingButton) {
                 selectWhippingOption((Button) v, "조금");
             } else if (v.getId() == R.id.option_normalWhippingButton) {

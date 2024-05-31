@@ -1,15 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
-        android:text="커피"
-        android:textSize="35dp"
-        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints" />
+        android:text="커피"
+        android:textColor="@android:color/black"
+        android:textSize="35dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/americano_Button"
+            android:layout_width="0dp"
+            android:layout_height="260dp"
+            android:layout_weight="1"
+            android:layout_margin="15dp"
+            android:backgroundTint="@android:color/white"
+            android:textColor="@android:color/black"
+            android:drawableTop="@drawable/americano"
+            android:text="아메리카노\n3000원"
+            android:scaleType="fitCenter" />
+
+
+        <Button
+            android:id="@+id/cafe_latte_Button"
+            android:layout_width="0dp"
+            android:layout_height="260dp"
+            android:layout_weight="1"
+            android:layout_margin="15dp"
+            android:backgroundTint="@android:color/white"
+            android:textColor="@android:color/black"
+            android:drawableTop="@drawable/latte"
+            android:text="카페라떼\n4200원" />
+
+        <Button
+            android:id="@+id/cafe_mocha_Button"
+            android:layout_width="0dp"
+            android:layout_height="260dp"
+            android:layout_weight="1"
+            android:layout_margin="15dp"
+            android:backgroundTint="@android:color/white"
+            android:textColor="@android:color/black"
+            android:drawableTop="@drawable/mocha"
+            android:text="카페모카\n4500원" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/vanilla_latte_Button"
+            android:layout_width="0dp"
+            android:layout_height="260dp"
+            android:layout_weight="1"
+            android:layout_margin="15dp"
+            android:backgroundTint="@android:color/white"
+            android:textColor="@android:color/black"
+            android:drawableTop="@drawable/vanilla_latte"
+            android:text="바닐라라떼\n4500원" />
+
+        <Button
+            android:id="@+id/espresso_Button"
+            android:layout_width="0dp"
+            android:layout_height="260dp"
+            android:layout_weight="1"
+            android:layout_margin="15dp"
+            android:backgroundTint="@android:color/white"
+            android:textColor="@android:color/black"
+            android:drawableTop="@drawable/espresso"
+            android:text="에스프레소\n3000원" />
+
+        <Button
+            android:visibility="invisible"
+            android:layout_width="0dp"
+            android:layout_height="260dp"
+            android:layout_weight="1"
+            android:layout_margin="15dp"
+            android:backgroundTint="@android:color/white"
+            android:textColor="@android:color/black"
+            android:drawableTop="@drawable/vanilla_latte"
+            android:text="블루베리요거트스무디\n4000원" />
+
+    </LinearLayout>
+
+</LinearLayout>
