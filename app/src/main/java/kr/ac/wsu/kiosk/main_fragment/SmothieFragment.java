@@ -206,7 +206,7 @@ public class SmothieFragment extends Fragment {
             int price = Integer.parseInt(menuPrice_TextView.getText().toString().replace("원", ""));
             String option = "시럽 " + syrup + ", 휘핑 " + whipping;
 
-            adapter.addItem(new Data(menu, temperature, price, option, img_id));
+            adapter.addItem(new Data(menu, temperature, price, option, img_id,1 ));
         }
     }
 

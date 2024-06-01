@@ -1,15 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
-        android:text="차"
-        android:textSize="35dp"
-        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints" />
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="차"
+        android:textColor="@android:color/black"
+        android:textSize="35dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/tea_honey_Button"
+            android:background="@drawable/menu_rounder"
+            android:paddingTop="20dp"
+            android:layout_width="0dp"
+            android:layout_height="350dp"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/white"
+            android:drawableTop="@drawable/honey_black_tea"
+            android:scaleType="fitCenter"
+            android:text="자몽허니블랙티\n3000원"
+            android:textColor="@android:color/black" />
+
+
+        <Button
+            android:id="@+id/tea_peach_Button"
+            android:background="@drawable/menu_rounder"
+            android:paddingTop="20dp"
+            android:layout_width="0dp"
+            android:layout_height="350dp"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/white"
+            android:drawableTop="@drawable/peach_ice_tea"
+            android:text="복숭아 아이스티\n3000원"
+            android:textColor="@android:color/black" />
+
+        <Button
+            android:id="@+id/tea_earlgrey_Button"
+            android:background="@drawable/menu_rounder"
+            android:paddingTop="20dp"
+            android:layout_width="0dp"
+            android:layout_height="350dp"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/white"
+            android:drawableTop="@drawable/earl_grey_tea"
+            android:text="얼그레이티\n2500원"
+            android:textColor="@android:color/black" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/tea_lemon_Button"
+            android:background="@drawable/menu_rounder"
+            android:paddingTop="20dp"
+            android:layout_width="0dp"
+            android:layout_height="350dp"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/white"
+            android:drawableTop="@drawable/lemon_tea"
+            android:text="레몬차\n3000원"
+            android:textColor="@android:color/black" />
+
+        <Button
+            android:id="@+id/tea_apple_Button"
+            android:background="@drawable/menu_rounder"
+            android:paddingTop="20dp"
+            android:layout_width="0dp"
+            android:layout_height="350dp"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/white"
+            android:drawableTop="@drawable/apple_citrus_tea"
+            android:text="사과유자차\n3500원"
+            android:textColor="@android:color/black" />
+
+        <Button
+            android:id="@+id/tea_hibiscus_Button"
+            android:background="@drawable/menu_rounder"
+            android:paddingTop="20dp"
+            android:layout_width="0dp"
+            android:layout_height="350dp"
+            android:layout_margin="15dp"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/white"
+            android:drawableTop="@drawable/shine_hibiscus_tea"
+            android:text="히비스커스\n3200원"
+            android:textColor="@android:color/black" />
+
+    </LinearLayout>
+
+</LinearLayout>

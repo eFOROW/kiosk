@@ -70,6 +70,7 @@
             android:orientation="horizontal">
 
             <Button
+                android:layout_marginEnd="8dp"
                 android:id="@+id/option_iceButton"
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
@@ -214,6 +215,7 @@
                 android:layout_width="170dp"
                 android:layout_height="75dp"
                 android:backgroundTint="#FFBB33"
+                android:textColor="@color/white"
                 android:text="선택완료"
                 android:layout_marginEnd="8dp" />
 

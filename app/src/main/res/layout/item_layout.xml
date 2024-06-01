@@ -17,7 +17,7 @@
         android:layout_marginStart="25dp"
         android:layout_gravity="center"
         android:orientation="vertical"
-        android:layout_width="370dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content">
 
         <ImageView
@@ -54,9 +54,9 @@
     <Button
         android:id="@+id/item_minus_Button"
         android:layout_gravity="center"
-        android:text="-"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"/>
+        android:background="@drawable/minus_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"/>
 
     <TextView
         android:id="@+id/item_count_TextView"
@@ -71,18 +71,18 @@
     <Button
         android:id="@+id/item_add_Button"
         android:layout_gravity="center"
-        android:text="+"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"/>
+        android:background="@drawable/plus_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"/>
 
     <Button
         android:id="@+id/itme_delete_Button"
-        android:layout_marginLeft="45dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="X"
-        android:textColor="@color/white"
+        android:layout_marginLeft="45dp"
         android:backgroundTint="#FF3D3D"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"/>
+        android:text="삭제"
+        android:textColor="@color/white" />
 
 </LinearLayout>

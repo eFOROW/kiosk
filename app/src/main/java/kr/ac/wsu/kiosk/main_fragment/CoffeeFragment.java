@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -194,7 +195,7 @@ public class CoffeeFragment extends Fragment {
             int price = Integer.parseInt(menuPrice_TextView.getText().toString().replace("원", ""));
             String option = "시럽 " + syrup + ", 휘핑 " + whipping;
 
-            adapter.addItem(new Data(menu, temperature, price, option, img_id));
+            adapter.addItem(new Data(menu, temperature, price, option, img_id, 1));
         }
     }
 
@@ -278,5 +279,4 @@ public class CoffeeFragment extends Fragment {
         selectedWhippingButton = optionButton;
         whipping = option;
     }
-
 }

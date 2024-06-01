@@ -23,6 +23,8 @@
 
         <Button
             android:id="@+id/smothie_blueberry_Button"
+            android:background="@drawable/menu_rounder"
+            android:paddingTop="20dp"
             android:layout_width="0dp"
             android:layout_height="350dp"
             android:layout_weight="1"
@@ -36,6 +38,8 @@
 
         <Button
             android:id="@+id/smothie_strawberry_Button"
+            android:background="@drawable/menu_rounder"
+            android:paddingTop="20dp"
             android:layout_width="0dp"
             android:layout_height="350dp"
             android:layout_weight="1"
@@ -47,6 +51,8 @@
 
         <Button
             android:id="@+id/smothie_mango_Button"
+            android:background="@drawable/menu_rounder"
+            android:paddingTop="20dp"
             android:layout_width="0dp"
             android:layout_height="350dp"
             android:layout_weight="1"
@@ -66,6 +72,8 @@
 
         <Button
             android:id="@+id/smothie_citron_Button"
+            android:background="@drawable/menu_rounder"
+            android:paddingTop="20dp"
             android:layout_width="0dp"
             android:layout_height="350dp"
             android:layout_weight="1"
@@ -77,6 +85,8 @@
 
         <Button
             android:id="@+id/smothie_plainyogurt_Button"
+            android:background="@drawable/menu_rounder"
+            android:paddingTop="20dp"
             android:layout_width="0dp"
             android:layout_height="350dp"
             android:layout_weight="1"
@@ -88,6 +98,8 @@
 
         <Button
             android:id="@+id/smothie_blueberryyougurt_Button"
+            android:background="@drawable/menu_rounder"
+            android:paddingTop="20dp"
             android:layout_width="0dp"
             android:layout_height="350dp"
             android:layout_weight="1"

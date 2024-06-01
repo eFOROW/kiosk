@@ -1,6 +1,8 @@
 package kr.ac.wsu.kiosk;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +14,9 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -40,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
     private TeaFragment teaFragment;
 
     TextView count_tv, cart_price_TextView;
+
+    // Button 객체
+    Button coffeeBtn, smothieBtn, teaBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,10 +82,10 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         // Button 객체 생성 및 초기화
-        Button coffeeBtn = findViewById(R.id.main_coffee_button);
-        Button smothieBtn = findViewById(R.id.main_smothie_button);
-        Button teaBtn = findViewById(R.id.main_tea_button);
-        Button payBtn = findViewById(R.id.mian_payment_Button);
+        coffeeBtn = findViewById(R.id.main_coffee_button);
+        smothieBtn = findViewById(R.id.main_smothie_button);
+        teaBtn = findViewById(R.id.main_tea_button);
+        Button payBtn = findViewById(R.id.main_payment_Button);
 
         // FragmentManager 초기화
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -90,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
         smothieFragment = new SmothieFragment();
         smothieFragment.setAdapter(adapter);
         teaFragment = new TeaFragment();
+        teaFragment.setAdapter(adapter);
 
         fragmentTransaction.add(R.id.main_Framelayout, coffeeFragment);
         fragmentTransaction.commit();
@@ -100,12 +108,23 @@ public class MainActivity extends AppCompatActivity {
             int id = v.getId();
             if (id == R.id.main_coffee_button) {
                 transaction.replace(R.id.main_Framelayout, coffeeFragment);
+                updateButtonStyles(coffeeBtn);
             } else if (id == R.id.main_smothie_button) {
                 transaction.replace(R.id.main_Framelayout, smothieFragment);
+                updateButtonStyles(smothieBtn);
             } else if (id == R.id.main_tea_button) {
                 transaction.replace(R.id.main_Framelayout, teaFragment);
-            } else if (id == R.id.mian_payment_Button) {
+                updateButtonStyles(teaBtn);
+            } else if (id == R.id.main_payment_Button) {
                 // 결제 버튼 클릭 시 동작
+                if (data.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "장바구니에 상품이 없습니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    Intent intent = new Intent(this, PayActivity.class);
+                    DataManager.getInstance().setDataList(data);
+                    startActivityForResult(intent, requestCode);
+                }
             }
             transaction.commit();
         };
@@ -133,6 +152,24 @@ public class MainActivity extends AppCompatActivity {
                 cartget_tv.setText("매장");
             }
         }
+    }
+
+    private void updateButtonStyles(Button selectedButton) {
+        Button[] buttons = {coffeeBtn, smothieBtn, teaBtn};
+
+        for (Button button : buttons) {
+            if (button == selectedButton) {
+                button.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.colorSelected)); // #FFBB33
+                button.setTextColor(ContextCompat.getColor(this, R.color.white));
+            } else {
+                button.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.white));
+                button.setTextColor(ContextCompat.getColor(this, R.color.black));
+            }
+        }
+    }
+
+    public String getOrderList() {
+        return "Hello from MainActivity!";
     }
 
     public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.DataViewHolder> {
@@ -215,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
             for (Data item : data) {
                 totalCount += item.count;
             }
-            count_tv.setText(totalCount + "개");
+            count_tv.setText(totalCount + "잔");
         }
 
         // 장바구니 총 가격 업데이트
@@ -224,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
             for (Data item : data) {
                 totalPrice += item.price * item.count;
             }
-            cart_price_TextView.setText("총 가격: " + totalPrice + "원");
+            cart_price_TextView.setText("₩ " + totalPrice);
         }
 
         // ViewHolder 클래스
@@ -245,6 +282,16 @@ public class MainActivity extends AppCompatActivity {
                 minus_Btn = view.findViewById(R.id.item_minus_Button);
                 delete_Btn = view.findViewById(R.id.itme_delete_Button);
             }
+        }
+    }
+
+    int requestCode = 123;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            // PayActivity에서 정상적으로 종료된 경우 MainActivity도 종료합니다.
+            finish();
         }
     }
 }

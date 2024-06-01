@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="25dp"
+    tools:context=".pay_Fragment.CardPayFragment">
+
+    <TextView
+        android:id="@+id/cardpay_title_TextView"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:text="카드 결제"
+        android:textStyle="bold"
+        android:textColor="#FFBB33"
+        android:textSize="30dp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/cardpay_content_TextView"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:text="카드를 다음과 같이 투입해 주세요."
+        android:textSize="22dp"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/cardpay_ImageView"
+        android:layout_marginTop="100dp"
+        android:layout_gravity="center"
+        android:src="@drawable/receipt_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:visibility="invisible"
+        android:id="@+id/cardpay_finish_Button"
+        android:text="처음으로"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:background="@drawable/round_border"
+        android:layout_marginTop="70dp"
+        android:layout_gravity="center"
+        android:layout_width="200dp"
+        android:layout_height="80dp"/>
+
+</LinearLayout>
