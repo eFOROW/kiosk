@@ -93,7 +93,6 @@ public class TeaFragment extends Fragment {
         // 온도 선택
         Button hotBtn = dialogView.findViewById(R.id.option_hotButton);
         Button iceBtn = dialogView.findViewById(R.id.option_iceButton);
-        hotBtn.setVisibility(View.INVISIBLE);
 
         // 시럽 선택
         Button littleSyrupBtn = dialogView.findViewById(R.id.option_littleSyrupButton);
