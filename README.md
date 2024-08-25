@@ -15,3 +15,14 @@
 - **김원형(PM)** : Android & Design 담당
 - **김차겸(PA)** : Design & Structure 담당
 - **서동현(PA)** : Flow chart  & Plan 담당
+
+
+
+## 시연 사진
+<img src="https://github.com/user-attachments/assets/80e016b7-138c-46f1-96c6-37cf19802d1d" width="240" height="400"/>
+<img src="https://github.com/user-attachments/assets/495376d2-74a4-4b7f-ba24-e4fb206cd2b9" width="240" height="400"/>
+<img src="https://github.com/user-attachments/assets/bca56759-fed6-4cd6-808c-2c7f5c89b63d" width="240" height="400"/>
+<img src="https://github.com/user-attachments/assets/335738f2-ce98-4624-a8fa-4032d264fb54" width="240" height="400"/>
+
+![image](https://github.com/user-attachments/assets/edd5d3df-3acb-4848-88e0-af39ae7c52f1)
+![image](https://github.com/user-attachments/assets/4d9b0a93-4377-46e4-90b9-e805947c8f99)
